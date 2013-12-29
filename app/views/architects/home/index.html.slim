@@ -3,7 +3,7 @@
   .row
     .col-md-6
       .panel.well
-        h3 Annotated Screens
+        h3 Feature Documents
         - Architects::Docs.category_names.each do |category_name|
           h6= category_name
           ul
@@ -14,7 +14,7 @@
 
     .col-md-6
       .panel.well
-        h3 REST API Doc
+        h3 API Integration Specs 
         - Architects::ApiDocs.resource_names.each do |resource_name|
           h6= resource_name
           ul

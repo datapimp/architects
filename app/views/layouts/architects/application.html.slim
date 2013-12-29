@@ -3,8 +3,17 @@ html
   head
     title= Architects.configuration.title 
     meta name="viewport" content="width=device-width, initial-scale=1"
+  
     = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'
+
+    = yield(:style_head)
+
     = stylesheet_link_tag 'architects/application'
+
+    = yield(:after_style)
+
+    = yield(:script_head)
+    
 
   body id="#{ controller_name }_#{ action_name }" class="#{ controller_name }" data-controller=controller_name data-action=action_name
     = yield

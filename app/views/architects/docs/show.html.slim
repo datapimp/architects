@@ -1,0 +1,55 @@
+- content_for(:script_head)
+  = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js"
+  = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/lang/json.min.js" 
+  javascript:
+    hljs.initHighlightingOnLoad();
+
+- content_for(:after_style)
+  = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/monokai.min.css"
+
+.container
+  header
+    h1
+      '#{ @example.description }
+      small= @example.route
+        
+
+  section.architects-documentation-example
+    - unless @example.parameters.empty?
+      h3 Parameters
+      section.parameters-information
+        table.table.table-striped.table-condensed
+          thead
+            tr
+              th Name
+              th Description
+              th Scope
+              th Required?
+          tbody
+            - @example.parameters.each do |param|
+              tr
+                td= param.name
+                td= param.description
+                td= param.scope
+                td= param.required
+    
+    h3 URL 
+    code
+      = "#{ @example.requests.first.request_method } #{ @example.formatted_request_path }"
+    
+    - if @example.write?
+      section.row
+        .col-md-12
+          h3 Request Body
+          pre
+            code= format_response(@example.request_body_as_json, example: @example)
+
+    section.row
+      .col-md-12
+        h3 Response Body
+        pre
+          code= format_response(@example.response, example: @example)
+
+        h3 Response Headers
+        pre
+          = format_response_headers(@example.response_headers(only:["Cache-Control","ETag","Content-Type","Content-Length"]), example: @example) 

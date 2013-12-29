@@ -6,6 +6,20 @@ module Architects::ScreensHelper
     end
   end
 
+  def format_response_headers hash, options={}
+    example = options[:example]
+
+    hash.inject("HTTP Status #{ example.response_status }\n") do |memo,pair|
+      header, value = pair
+      memo << "#{ header }= #{ value }\n"
+    end
+  end
+
+  def format_response object, options={}
+    return JSON.pretty_generate(object) if object.is_a?(Array) || object.is_a?(Hash)
+    object.to_s
+  end
+
   def link_for(command, screen)
     type, arg = command.split(':')
 
