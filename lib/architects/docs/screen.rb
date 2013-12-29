@@ -20,6 +20,11 @@ module Architects
         try(:[],:references) || Hashie::Mash.new({})
       end
 
+      def annotation_images
+        list = try(:[], :annotation_images)
+        list.nil? ? [screen.image] : Array(list)
+      end
+
       def annotations
         Array(try(:[],:annotations))
       end

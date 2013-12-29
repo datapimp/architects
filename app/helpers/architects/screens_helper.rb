@@ -20,6 +20,11 @@ module Architects::ScreensHelper
     object.to_s
   end
 
+  def screen_image_path(image)
+    path = Architects.configuration.images_path
+    [path,image].compact.join("/")
+  end
+
   def link_for(command, screen)
     type, arg = command.split(':')
 

@@ -10,23 +10,27 @@
 
   section.details.clearfix
     .screen-image
-      img src=asset_path(@screen.screen.image) height="100%" width="100%"
+      - @screen.annotation_images.each_with_index do |image,index|
+        img src=screen_image_path(image) height="100%" width="100%" class="#{ 'hidden' if index > 0 }"
+
       .annotation-anchors 
         - @screen.annotations.each do |annotation|
           .anchor
             .number style=annotation_style(annotation.style)
               '#{annotation.number}
-    
+
     .content
       - unless @screen.description.empty?
         h3 Description
         p= @screen.description
-
+    
       - unless @screen.display_conditions.empty?
         .display-conditions.conditions-list
           h3 When should the user see this? 
           = render(:partial=>"architects/screens/partials/condition", :collection => @screen.display_conditions, :as => :condition)
       
+      - raise
+
       ul#tabs.nav.nav-pills
         - unless @screen.annotations.empty?
           li.toggle.annotations
@@ -40,7 +44,7 @@
           li.toggle.data-sources
             a href="#data-sources" data-toggle="pill"
               'Data Sources
-        
+
       .tab-content
         - unless @screen.annotations.empty?
           = render(:partial=>"architects/screens/annotations")
