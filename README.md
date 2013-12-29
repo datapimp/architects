@@ -1,9 +1,14 @@
-# Smooth
+# Architects
 
-Smooth is a no headaches, no busy work system for building JSON APIs to
-work with your rich web and mobile applications.  
+Architects is a tool for writing better documentation.
 
-It is designed to be the first point of contact for your client
-applications, and to support the full life cycle of an application from
-a protoype with data models which change often, to an app running at scale 
-across many servers that relies heavily on caching.
+If you are designing client based applications for iOS, Android, or the
+Web, and you are heavily reliant on interacting with REST APIs then this
+tool will make your life much easier.
+
+### Status
+
+This project is heavily alpha right now.
+
+It is dependent on rspec_api_documentation configured to output its
+specs in JSON mode.
