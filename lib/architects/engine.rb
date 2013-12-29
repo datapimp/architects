@@ -5,7 +5,12 @@ module Architects
     initializer :assets, group: :all do |app|
       # default the root if it's not set
       Architects.configuration.root ||= app.root
+
+      if File.exists?(Architects.configuration.screens_path)
+        app.config.assets.paths << Architects.configuration.screens_path
+      end
     end
+
 
     config.after_initialize do |app|
       # prepend routes so a catchall doesn't get in the way

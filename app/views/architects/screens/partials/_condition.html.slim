@@ -1,0 +1,8 @@
+.content
+  p= linkify(condition.content, @screen).html_safe
+  - if condition.conditions
+    dl.condition-list
+      - condition.conditions.each do |setting,value|
+        dt= setting
+        dd= value
+

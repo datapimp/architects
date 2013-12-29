@@ -1,0 +1,23 @@
+.container
+  h1 Welcome to #{ Architects.configuration.title } 
+  .row
+    .col-md-6
+      .panel.well
+        h3 Annotated Screens
+        - Architects::Docs.category_names.each do |category_name|
+          h6= category_name
+          ul
+          - Architects::Docs.screens_for_category(category_name).each do |screen|
+            li
+              = link_to screen.title, "/architects/screens/#{ screen.id }" 
+          
+
+    .col-md-6
+      .panel.well
+        h3 REST API Doc
+        - Architects::ApiDocs.resource_names.each do |resource_name|
+          h6= resource_name
+          ul
+          - Architects::ApiDocs.examples_for_resource(resource_name).each do |example|
+            li
+              = link_to example.description, "/architects/docs/#{ example.id }" 

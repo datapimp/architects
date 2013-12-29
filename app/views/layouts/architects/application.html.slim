@@ -1,10 +1,13 @@
 doctype html
 html
   head
-    title= Architects.config.title 
+    title= Architects.configuration.title 
     meta name="viewport" content="width=device-width, initial-scale=1"
+    = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'
     = stylesheet_link_tag 'architects/application'
 
   body id="#{ controller_name }_#{ action_name }" class="#{ controller_name }" data-controller=controller_name data-action=action_name
     = yield
+    = javascript_include_tag 'jquery', 'jquery_ujs'
+    = javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js'
     = javascript_include_tag 'architects/application'

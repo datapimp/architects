@@ -1,0 +1,12 @@
+ul.categories-list
+  - docs.categories.each do |category|
+    li 
+      .category-title= category
+      - screens = docs.screens_for_category(category)
+      - unless screens.empty?
+        ul.screens-list
+          - screens.each do |screen|
+            a href=architects_screen_path(screen.id)
+              '#{ screen.title }
+
+

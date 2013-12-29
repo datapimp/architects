@@ -1,0 +1,21 @@
+#data-sources.tab-pane.fade
+  h3 Data Sources
+  - @screen.data_sources.values.each do |data_source|
+    - reference = @screen.references[data_source.reference]
+    - example = Architects::ApiDocs.find_example(reference.link)
+    .data-source
+      h4= data_source.name
+      table.table.table-striped.table-condensed
+        tr
+          th Route
+          td= example.route
+        tr
+          th Documentation
+          td= link_to "Documentation", architects_doc_path(example.id)
+        tr
+          th Relevant Attributes
+          td= data_source.dependencies.join(', ')
+      pre
+        code
+          = JSON.pretty_generate(example.response)
+

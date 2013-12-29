@@ -1,0 +1,50 @@
+.architects-screen data-screen-type=@screen.screen_type
+  header.row
+    .col-md-8
+      h1.screen-title= @screen.title
+    .col-md-4 style="padding-top:36px"
+      - if @screen.transitions.next
+        - link = @screen.get_transition_link('next')
+        a href=architects_screen_path(link[:link])
+          ' Next: #{ link[:description] }
+
+  section.details.clearfix
+    .screen-image
+      img src=asset_path(@screen.screen.image) height="100%" width="100%"
+      .annotation-anchors 
+        - @screen.annotations.each do |annotation|
+          .anchor
+            .number style=annotation_style(annotation.style)
+              '#{annotation.number}
+    
+    .content
+      - unless @screen.description.empty?
+        h3 Description
+        p= @screen.description
+
+      - unless @screen.display_conditions.empty?
+        .display-conditions.conditions-list
+          h3 When should the user see this? 
+          = render(:partial=>"architects/screens/partials/condition", :collection => @screen.display_conditions, :as => :condition)
+      
+      ul#tabs.nav.nav-pills
+        - unless @screen.annotations.empty?
+          li.toggle.annotations
+            a href="#annotations" data-toggle="pill"
+              'Annotations
+        - unless @screen.acceptance_criteria.empty?
+          li.toggle.acceptance-criteria
+            a href="#acceptance-criteria" data-toggle="pill"
+              'Acceptance Criteria
+        - unless @screen.data_sources.empty?
+          li.toggle.data-sources
+            a href="#data-sources" data-toggle="pill"
+              'Data Sources
+        
+      .tab-content
+        - unless @screen.annotations.empty?
+          = render(:partial=>"architects/screens/annotations")
+        - unless @screen.acceptance_criteria.empty?
+          = render(:partial=>"architects/screens/acceptance_criteria")
+        - unless @screen.data_sources.empty?
+          = render(:partial=>"architects/screens/data_sources")

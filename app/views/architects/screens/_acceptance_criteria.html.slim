@@ -1,0 +1,9 @@
+#acceptance-criteria.tab-pane.fade
+  h3 Acceptance Criteria
+  .acceptance-criteria-list
+    - @screen.acceptance_criteria.each do |criteria|
+      .row
+        .col-md-1
+          input type="checkbox" checked=criteria.accepted
+        .col-md-11
+          p= criteria.description

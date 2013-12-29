@@ -1,0 +1,15 @@
+#annotations.annotation-details.tab-pane.fade
+  h3 Notes
+  - @screen.annotations.each do |annotation|
+    .annotation
+      h5
+        .badge style="margin-right:6px"
+          = annotation.number
+        = annotation.label
+      
+      - unless(annotation.notes.empty?)
+        .notes.clearfix
+          - annotation.notes.each do |note|
+            - key, content = note
+            .note.clearfix
+              = display_annotation_content(content, @screen)
