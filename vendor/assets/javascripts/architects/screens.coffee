@@ -35,7 +35,6 @@ setupCarousel = ->
     carousel.carousel(index)
 
 
-
 hasMultipleImages = ->
   $('#image-carousel[data-multiple]').length > 0
 

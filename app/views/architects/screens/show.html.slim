@@ -40,8 +40,8 @@
                 img src=screen_image_path(image) height="100%" width="100%"
 
                 .annotation-anchors 
-                  - @screen.annotations.select {|a| a.image == image}.each  do |annotation|
-                    .anchor data-image="#{ annotation.image || @screen.image }"
+                  - @screen.annotations.select {|a| a.image.nil? || (a.image == image) || (a.image == @screen.screen.image)}.each  do |annotation|
+                    .anchor data-image="#{ annotation.image || @screen.screen.image }"
                       .number style=annotation_style(annotation.style)
                         '#{annotation.number}
 

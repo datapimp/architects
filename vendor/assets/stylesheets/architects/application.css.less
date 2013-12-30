@@ -40,6 +40,11 @@ html, body {
       width: 380px;
       height: 674px;
       position: relative;
+
+      img {
+        position: absolute;
+        z-index: 2;
+      }
     }
 
     .carousel-indicators {
@@ -48,6 +53,7 @@ html, body {
       padding: 8px 0px;
       box-shadow: 0 0 6px rgba(0,0,0,0.4);
       opacity: 0.3;
+      z-index: 600;
       &:hover {
         opacity: 0.9;
       }
@@ -57,7 +63,21 @@ html, body {
   .annotation-anchors {
     width: 100%;
     height: 100%;
+    position: absolute;
+    z-index: 500; 
 
+    background-color: rgba(0,0,0,0);
+
+    &.annotations-enabled {
+      background-color: rgba(0,0,0,0.4);
+
+      .anchor {
+        display: block;
+      }
+    }
+    .anchor {
+      display: none;
+    }
     .anchor .number {
       .badge;
       position: absolute;
