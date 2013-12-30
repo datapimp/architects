@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport', '~> 4.0.0'
   s.add_dependency 'rspec_api_documentation'
-  s.add_dependency 'slim'
 
   s.add_development_dependency 'rspec', '~> 2.6.0'
   s.add_development_dependency 'machinist', '~> 1.0.6'
