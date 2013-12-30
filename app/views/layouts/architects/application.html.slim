@@ -17,6 +17,5 @@ html
 
   body id="#{ controller_name }_#{ action_name }" class="#{ controller_name }" data-controller=controller_name data-action=action_name
     = yield
-    = javascript_include_tag 'architects/dependencies'
-    = javascript_include_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js'
-    = javascript_include_tag 'architects/application'
+
+    = javascript_include_tag 'architects/dependencies', 'architects/application'
