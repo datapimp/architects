@@ -1,8 +1,13 @@
 #acceptance-criteria.tab-pane.fade
-  .acceptance-criteria-list
-    - @screen.acceptance_criteria.each do |criteria|
-      .row
-        .col-md-1
-          input type="checkbox" checked=criteria.accepted
-        .col-md-11
-          p= linkify(criteria.description, @screen).html_safe
+  table.table.table-striped.acceptance-criteria-list
+    thead
+      tr
+        th Description
+        th Accepted?
+    tbody
+      - @screen.acceptance_criteria.each do |criteria|
+        tr
+          td
+            p= linkify(criteria.description, @screen).html_safe
+          td
+            input type="checkbox" checked=criteria.accepted

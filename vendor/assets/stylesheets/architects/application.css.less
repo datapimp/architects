@@ -33,9 +33,31 @@ html, body {
       .make-md-column(4);
     }
     .content-wrapper {
-      .make-md-column(8);
+      .make-md-column(6);
     }
 
+  }
+}
+
+.annotation {
+  border-bottom: 1px solid @gray-lighter;
+  padding: 12px 0px;
+  
+  .notes {
+    .clearfix;
+    width: 95%;
+  }
+
+  .note:before {
+    content: "-";
+    padding: 0px 8px;
+    display: block;
+    float: left;
+  }
+
+  .note .content {
+    padding-left: 8px;
+    padding-bottom: 8px;
   }
 }
 

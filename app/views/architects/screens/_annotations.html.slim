@@ -1,14 +1,22 @@
 #annotations.annotation-details.tab-pane.fade
-  - @screen.annotations.each do |annotation|
-    .annotation data-image=(annotation.image || @screen.screen.image) data-annotaton-number=annotation.number
-      h5
-        .badge style="margin-right:6px"
-          = annotation.number
-        = annotation.label
-      
-      - unless(annotation.notes.empty?)
-        .notes.clearfix
-          - annotation.notes.each do |note|
-            - key, content = note
-            .note.clearfix
-              = display_annotation_content(content, @screen)
+  table.table.table-striped
+    thead
+      tr
+        th Marker
+        th Label
+        th Contents
+    tbody
+    - @screen.annotations.each do |annotation|
+      tr.annotation data-image=(annotation.image || @screen.screen.image) data-annotaton-number=annotation.number
+        td
+          .badge style="margin-right:6px"
+            = annotation.number
+        td
+          = annotation.label
+        td 
+          - unless(annotation.notes.empty?)
+            .notes.clearfix
+              - annotation.notes.each do |note|
+                - key, content = note
+                .note
+                  = display_annotation_content(content, @screen)
