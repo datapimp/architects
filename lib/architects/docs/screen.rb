@@ -9,32 +9,37 @@ module Architects
       end
 
       def data_sources
-        try(:[],:data_sources) || Hashie::Mash.new({})
+        fetch(:data_sources, Hashie::Mash.new({}))
       end
 
       def transitions
-        try(:[],:transitions) || Hashie::Mash.new({})
+        fetch(:transitions, Hashie::Mash.new({}))
       end
 
       def references
-        try(:[],:references) || Hashie::Mash.new({})
+        fetch(:references, Hashie::Mash.new({}))
       end
 
       def annotation_images
-        list = try(:[], :annotation_images)
-        list.nil? ? [screen.image] : Array(list)
+        defaults = screen
+
+        list = annotations.map do |annotation|
+          "#{ annotation.image || defaults.image }"
+        end.uniq
+
+        list.empty? ? [screen.image] : list
       end
 
       def annotations
-        Array(try(:[],:annotations))
+        fetch(:annotations,[])
       end
 
       def acceptance_criteria
-        Array(try(:[],:acceptance_criteria))
+        fetch(:acceptance_criteria,[])
       end
 
       def display_conditions
-        Array(try(:[],:display_conditions))
+        fetch(:display_conditions,[])
       end
 
       def get_transition_link transition

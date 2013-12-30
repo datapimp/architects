@@ -1,54 +1,90 @@
+- content_for(:script_head)
+  = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js"
+  = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/lang/json.min.js" 
+
+- content_for(:after_style)
+  = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/monokai.min.css"
+
+
 .architects-screen data-screen-type=@screen.screen_type
   header.row
     .col-md-8
       h1.screen-title= @screen.title
     .col-md-4 style="padding-top:36px"
-      - if @screen.transitions.next
-        - link = @screen.get_transition_link('next')
-        a href=architects_screen_path(link[:link])
-          ' Next: #{ link[:description] }
+      .btn-group
+        - if @screen.respond_to?(:parent) && @screen.parent
+          a.btn href=architects_screen_path(@screen.parent)
+        - else
+          a.btn href="/architects" Home
 
-  section.details.clearfix
-    .screen-image
-      - @screen.annotation_images.each_with_index do |image,index|
-        img src=screen_image_path(image) height="100%" width="100%" class="#{ 'hidden' if index > 0 }"
+        - if @screen.transitions.next
+          - link = @screen.get_transition_link('next')
+          a.btn href=architects_screen_path(link[:link])
+            ' Next: #{ link[:description] }
+  
 
-      .annotation-anchors 
-        - @screen.annotations.each do |annotation|
-          .anchor
-            .number style=annotation_style(annotation.style)
-              '#{annotation.number}
+  section.details.clearfix data-active-index=0
+    - images = @screen.annotation_images 
+    
+    .carousel-wrapper
+      #image-carousel.screen-image.carousel.slide data-multiple=(images.length > 1)
+        .carousel-indicator-wrapper
+          ol.carousel-indicators
+            - images.each_with_index do |image,index|
+              li.active data-target='#image-carousel' data-slide-to=index
+        
+        .carousel-inner
+          - images.each_with_index do |image,index|
+            div class="item #{'active' if index==0}" data-image=image
+              .annotation-inner
+                img src=screen_image_path(image) height="100%" width="100%"
+
+                .annotation-anchors 
+                  - @screen.annotations.select {|a| a.image == image}.each  do |annotation|
+                    .anchor data-image="#{ annotation.image || @screen.image }"
+                      .number style=annotation_style(annotation.style)
+                        '#{annotation.number}
+
+       
+        a.carousel-control.left href="#image-carousel" data-slide="prev"
+          '&lsaquo;
+
+        a.carousel-control.right href="#image-carousel" data-slide="next"
+          '&rsaquo;
 
     .content
       - unless @screen.description.empty?
-        h3 Description
-        p= @screen.description
+        .desription.clearfix
+          h3 Description
+          p= linkify(@screen.description, @screen).html_safe
     
       - unless @screen.display_conditions.empty?
-        .display-conditions.conditions-list
+        .display-conditions.conditions-list.clearfix
           h3 When should the user see this? 
           = render(:partial=>"architects/screens/partials/condition", :collection => @screen.display_conditions, :as => :condition)
       
-      - raise
+      - if screen_has_details?(@screen)
+        .clearfix
+        hr width="100%"
+        ul#tabs.nav.nav-pills
+          - unless @screen.annotations.empty?
+            li.toggle.annotations
+              a href="#annotations" data-toggle="pill"
+                'Annotations
+          - unless @screen.acceptance_criteria.empty?
+            li.toggle.acceptance-criteria
+              a href="#acceptance-criteria" data-toggle="pill"
+                'Acceptance Criteria
+          - unless @screen.data_sources.empty?
+            li.toggle.data-sources
+              a href="#data-sources" data-toggle="pill"
+                'Data Sources
 
-      ul#tabs.nav.nav-pills
-        - unless @screen.annotations.empty?
-          li.toggle.annotations
-            a href="#annotations" data-toggle="pill"
-              'Annotations
-        - unless @screen.acceptance_criteria.empty?
-          li.toggle.acceptance-criteria
-            a href="#acceptance-criteria" data-toggle="pill"
-              'Acceptance Criteria
-        - unless @screen.data_sources.empty?
-          li.toggle.data-sources
-            a href="#data-sources" data-toggle="pill"
-              'Data Sources
-
-      .tab-content
-        - unless @screen.annotations.empty?
-          = render(:partial=>"architects/screens/annotations")
-        - unless @screen.acceptance_criteria.empty?
-          = render(:partial=>"architects/screens/acceptance_criteria")
-        - unless @screen.data_sources.empty?
-          = render(:partial=>"architects/screens/data_sources")
+        hr width="100%"
+        .tab-content
+          - unless @screen.annotations.empty?
+            = render(:partial=>"architects/screens/annotations")
+          - unless @screen.acceptance_criteria.empty?
+            = render(:partial=>"architects/screens/acceptance_criteria")
+          - unless @screen.data_sources.empty?
+            = render(:partial=>"architects/screens/data_sources")

@@ -1,7 +1,6 @@
 #annotations.annotation-details.tab-pane.fade
-  h3 Notes
   - @screen.annotations.each do |annotation|
-    .annotation
+    .annotation data-image=(annotation.image || @screen.screen.image) data-annotaton-number=annotation.number
       h5
         .badge style="margin-right:6px"
           = annotation.number

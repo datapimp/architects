@@ -20,9 +20,13 @@ module Architects::ScreensHelper
     object.to_s
   end
 
+  def screen_has_details? screen
+    (!screen.annotations.empty? || !screen.acceptance_criteria.empty? || !screen.data_sources.empty?)
+  end
+
   def screen_image_path(image)
     path = Architects.configuration.images_path
-    [path,image].compact.join("/")
+    [path,asset_path(image)].compact.join("/")
   end
 
   def link_for(command, screen)

@@ -1,8 +1,6 @@
 - content_for(:script_head)
   = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js"
   = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/lang/json.min.js" 
-  javascript:
-    hljs.initHighlightingOnLoad();
 
 - content_for(:after_style)
   = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/monokai.min.css"

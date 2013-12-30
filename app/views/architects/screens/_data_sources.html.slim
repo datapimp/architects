@@ -1,5 +1,4 @@
 #data-sources.tab-pane.fade
-  h3 Data Sources
   - @screen.data_sources.values.each do |data_source|
     - reference = @screen.references[data_source.reference]
     - example = Architects::ApiDocs.find_example(reference.link)
