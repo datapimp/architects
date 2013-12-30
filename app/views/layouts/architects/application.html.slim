@@ -1,11 +1,11 @@
 doctype html
-html
+html.architects-application
   head
+
     title= Architects.configuration.title 
+
     meta name="viewport" content="width=device-width, initial-scale=1"
   
-    = stylesheet_link_tag '//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'
-
     = yield(:style_head)
 
     = stylesheet_link_tag 'architects/application'
@@ -13,9 +13,24 @@ html
     = yield(:after_style)
 
     = yield(:script_head)
-    
 
   body id="#{ controller_name }_#{ action_name }" class="#{ controller_name }" data-controller=controller_name data-action=action_name
+    .navbar.navbar-inverse role="navigation"
+      .navbar-header
+        button.navbar-toggle type="button" data-toggle="collapse" data-target="nav1"
+          span.sr-only Toggle
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand href=Architects.configuration.mount_at Linx
+
+      #nav1.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li.active
+            a href=Architects.configuration.mount_at Home
+
     = yield
 
     = javascript_include_tag 'architects/dependencies', 'architects/application'
+
+    = yield(:footer)

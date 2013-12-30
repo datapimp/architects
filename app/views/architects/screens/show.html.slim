@@ -6,11 +6,11 @@
   = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/monokai.min.css"
 
 
-.architects-screen data-screen-type=@screen.screen_type
-  header.row
+.page.architects-screen data-screen-type=@screen.screen_type
+  header
     .col-md-8
       h1.screen-title= @screen.title
-    .col-md-4 style="padding-top:36px"
+    .col-md-4
       .btn-group
         - if @screen.respond_to?(:parent) && @screen.parent
           a.btn href=architects_screen_path(@screen.parent)
@@ -23,7 +23,7 @@
             ' Next: #{ link[:description] }
   
 
-  section.details.clearfix data-active-index=0
+  section.details
     - images = @screen.annotation_images 
     
     .carousel-wrapper
@@ -52,7 +52,7 @@
         a.carousel-control.right href="#image-carousel" data-slide="next"
           '&rsaquo;
 
-    .content
+    .content-wrapper
       - unless @screen.description.empty?
         .desription.clearfix
           h3 Description

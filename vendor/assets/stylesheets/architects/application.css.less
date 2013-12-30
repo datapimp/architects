@@ -4,34 +4,42 @@ html, body {
   height: 100%;
 }
 
-.architects-screen {
+.architects-version {
+  font-size: 1px;
+}
+
+.page {
   .container;
-  height: 100%;
-  
-  .carousel-wrapper {
-    float: left;
+
+  header {
+    .row;
+    padding: 36px 0px;
   }
 
-  .content {
-    float: left;
-    clear: right;
-    width: 600px;
-    max-width: 600px;
-    padding-left: 20px;
+  h1,h2,h3 {
+    margin-top: 0px;
   }
 
-  dl.condition-list {
-    dt {
-      width: 50%;
-      float: left;
+  section.details {
+    .row;
+    
+    .section {
+      .clearfix;
+      .make-md-column(9);
+      margin-bottom: 48px;
     }
-    dd {
-      width: 50%;
-      float: left;
-      clear: right;
+
+    .carousel-wrapper {
+      .make-md-column(4);
     }
+    .content-wrapper {
+      .make-md-column(8);
+    }
+
   }
-  
+}
+
+.page[data-screen-type="iphone"] {
   .screen-image.carousel {
     width: 380px;
     height: 674px;
@@ -39,8 +47,16 @@ html, body {
     .carousel-inner .annotation-inner{
       width: 380px;
       height: 674px;
-      position: relative;
+    }
+  }
+}
 
+.page {
+  height: 100%;
+  
+  .screen-image.carousel {
+    .carousel-inner .annotation-inner{
+      position: relative;
       img {
         position: absolute;
         z-index: 2;
@@ -65,9 +81,7 @@ html, body {
     height: 100%;
     position: absolute;
     z-index: 500; 
-
     background-color: rgba(0,0,0,0);
-
     &.annotations-enabled {
       background-color: rgba(0,0,0,0.4);
 
@@ -86,8 +100,18 @@ html, body {
       border: 1px solid;
       box-shadow: 0 0 6px rgba(0,0,0,0.4);
     }
+  }
+}
 
-
+dl.condition-list {
+  dt {
+    width: 50%;
+    float: left;
+  }
+  dd {
+    width: 50%;
+    float: left;
+    clear: right;
   }
 }
 

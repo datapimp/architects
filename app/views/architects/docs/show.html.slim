@@ -5,17 +5,17 @@
 - content_for(:after_style)
   = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/monokai.min.css"
 
-.container
+.page.architects-screen
   header
-    h1
-      '#{ @example.description }
-      small= @example.route
-        
+    .col-md-8
+      h1
+        '#{ @example.description }
+        small= @example.route
 
-  section.architects-documentation-example
-    - unless @example.parameters.empty?
-      h3 Parameters
-      section.parameters-information
+  section.details
+    section.section
+      - unless @example.parameters.empty?
+        h3 Parameters
         table.table.table-striped.table-condensed
           thead
             tr
@@ -31,23 +31,23 @@
                 td= param.scope
                 td= param.required
     
-    h3 URL 
-    code
-      = "#{ @example.requests.first.request_method } #{ @example.formatted_request_path }"
+    section.section
+      h3 URL 
+      code
+        = "#{ @example.requests.first.request_method } #{ @example.formatted_request_path }"
     
     - if @example.write?
-      section.row
-        .col-md-12
-          h3 Request Body
-          pre
-            code= format_response(@example.request_body_as_json, example: @example)
+      section.section
+        h3 Request Body
+        pre
+          code= format_response(@example.request_body_as_json, example: @example)
 
-    section.row
-      .col-md-12
+    section.section
         h3 Response Body
         pre
           code= format_response(@example.response, example: @example)
 
+    section.section
         h3 Response Headers
         pre
           = format_response_headers(@example.response_headers(only:["Cache-Control","ETag","Content-Type","Content-Length"]), example: @example) 
