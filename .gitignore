@@ -1,3 +1,4 @@
 /tmp
 /site
 /deploy
+/spec/dummy/tmp/**
