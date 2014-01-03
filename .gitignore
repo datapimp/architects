@@ -2,3 +2,5 @@
 /site
 /deploy
 /spec/dummy/tmp/**
+/build
+/node_modules
