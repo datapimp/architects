@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary       = "Tools for Software Architects"
   s.description   = "A tool for designing, documenting, and testing APIs "
 
-  s.add_dependency 'activesupport', '~> 4.0.0'
+  s.add_dependency 'activesupport', '>= 4.0.0'
   s.add_dependency 'rspec_api_documentation'
 
   s.add_development_dependency 'rspec', '~> 2.6.0'
