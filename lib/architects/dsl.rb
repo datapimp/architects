@@ -10,5 +10,11 @@ def self.feature(*args, &block)
   describe(*args, &block)
 end
 
+module Architects::DSL
+
+end
+
+require 'architects/dsl/feature' unless defined?(Architects::DSL::Feature)
+
 RSpec.configuration.include Architects::DSL::Feature, :api_doc_dsl => :feature
 RSpec.configuration.backtrace_exclusion_patterns << %r{lib/architects/dsl\.rb}

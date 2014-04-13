@@ -21,7 +21,6 @@ module Architects
     yield @@configuration
   end
 
-  autoload :DSL
   autoload :Docs
   autoload :ApiDocs
 
